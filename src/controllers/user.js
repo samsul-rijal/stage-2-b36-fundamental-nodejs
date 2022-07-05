@@ -2,6 +2,8 @@
 const db = require("../database/connection");
 const { QueryTypes } = require("sequelize");
 
+const {user} = require("../../models")
+
 // Function addUsers for insert user data to database
 exports.addUsers = async (req, res) => {
   try {
@@ -28,6 +30,8 @@ exports.addUsers = async (req, res) => {
 // Function getUsers for get all user data from database
 exports.getUsers = async (req, res) => {
   try {
+
+
     const query = "SELECT * FROM users";
     const data = await db.sequelize.query(query, { type: QueryTypes.SELECT });
 
