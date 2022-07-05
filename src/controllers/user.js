@@ -43,6 +43,26 @@ exports.getUsers = async (req, res) => {
         message: "Server Error",
       });
     }
-  };
+};
 
 // Create controller get User by received id here ...
+exports.getUser = async (req, res) => {
+    try {
+
+        const {id} = req.params
+
+        const query = `SELECT * FROM users WHERE id= ${id}`
+        const data = await db.sequelize.query(query, {type: QueryTypes.SELECT});
+    
+        res.send({
+            status: "success",
+            data
+        });
+    } catch (error) {
+      console.log(error);
+      res.send({
+        status: "failed",
+        message: "Server Error",
+      });
+    }
+};
