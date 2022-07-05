@@ -17,11 +17,113 @@ let todos = [
 ]
 
 // Create controller get Todos here
+exports.getTodos = async (req, res) => {
+
+    try {
+     
+        res.send({
+            status: "success",
+            data: todos
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: "failed",
+            message: "Server Error"
+        })        
+    }
+
+}
 
 // Create controller get Todo by received id here
+exports.getTodo = async (req, res) => {
+
+    try {
+        
+        let {id} = req.params
+        let index = id - 1
+
+        res.send({
+            status: "success",
+            data: todos[index]
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: "failed",
+            message: "Server Error"
+        })        
+    }
+
+}
 
 // Create controller add Todo here
+exports.addTodo = async (req, res) => {
+
+    try {
+        
+        todos = [...todos, req.body]
+
+        res.send({
+            status: "success",
+            data: todos
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: "failed",
+            message: "Server Error"
+        })        
+    }
+
+}
 
 // Create controller update Todo here
+exports.updateTodo = async (req, res) => {
+
+    try {
+
+        let {id} = req.params
+        let index = id - 1
+
+        todos[index] = {...todos[index], ...req.body}
+
+        res.send({
+            status: "success",
+            data: todos[index]
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: "failed",
+            message: "Server Error"
+        })        
+    }
+
+}
 
 // Create controller delete Todo here
+
+exports.deleteTodo = async (req, res) => {
+
+    try {
+
+        let {id} = req.params
+
+        todos = todos.filter((todo) => todo.id != id)
+
+        res.send(todos)
+
+    } catch (error) {
+        console.log(error);
+        res.send({
+            status: "failed",
+            message: "Server Error"
+        })        
+    }
+
+}
