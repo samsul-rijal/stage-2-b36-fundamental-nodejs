@@ -1,9 +1,11 @@
-//instantiate express module here
+const express = require("express")
+const app = express()
 
-//use express in app variable here
+const port = 5000
 
-//define the server port here
+app.get("/", (req, res) => {
+    res.send("Hello")
+})
 
-//create the homepage route here and inside it create res means, response, and it send string "Hello Express!" to the API
 
-// Create listen here
+app.listen(port, () => console.log(`Server running on port ${port}`))
